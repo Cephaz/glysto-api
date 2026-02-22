@@ -1,0 +1,19 @@
+name: Commit Message Lint
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+jobs:
+  gitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: abatilo/actions-poetry@v3
+      - name: Install dependencies
+        run: poetry install --with dev --no-interaction
+      - name: Lint commit messages
+        run: poetry run gitlint --commits "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
