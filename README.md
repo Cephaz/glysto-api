@@ -1,6 +1,4 @@
-# glysto-api
-
-Version: `0.1.0`
+![Version 0.3.0](https://img.shields.io/badge/version-0.3.0-2ea44f)
 
 ## Installation
 
@@ -36,3 +34,11 @@ Example:
 
 - Commit message lint runs on PRs.
 - Version bump and tag run on `main` merges.
+
+## Local git hook
+
+Install the commit message hook:
+
+```bash
+poetry run pre-commit install --hook-type commit-msg
+```

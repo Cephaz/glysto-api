@@ -17,10 +17,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.1.0"
+version = "0.3.0"
 version_provider = "pep621"
 tag_format = "v$version"
 update_changelog_on_bump = false
+version_files = ["README.md"]
 
 [tool.poetry]
 package-mode = false
@@ -28,3 +29,4 @@ package-mode = false
 [tool.poetry.group.dev.dependencies]
 gitlint = "^0.19.1"
 commitizen = "^4.13.8"
+pre-commit = "^4.5.1"
