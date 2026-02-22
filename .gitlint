@@ -1,0 +1,8 @@
+[general]
+ignore-merge-commits=true
+
+[title-max-length]
+line-length=100
+
+[title-match-regex]
+regex=^(feat|fix|docs|style|refactor|test|chore|ci|build|perf|revert)(\([a-z0-9_-]+\))?!?: .+
