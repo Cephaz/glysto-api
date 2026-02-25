@@ -6,6 +6,36 @@
 poetry install
 ```
 
+## Demarrage Django + users auth basique
+
+Commandes utiles:
+
+```bash
+poetry run python manage.py startapp users
+```
+
+Ajoute ensuite `"users"` dans `INSTALLED_APPS` dans `config/settings.py`, puis:
+
+```bash
+poetry run python manage.py makemigrations
+poetry run python manage.py migrate
+poetry run python manage.py createsuperuser
+```
+
+Pour lancer le serveur:
+
+```bash
+poetry run python manage.py runserver
+```
+
+## Local git hook
+
+Install the commit message hook:
+
+```bash
+poetry run pre-commit install --hook-type commit-msg
+```
+
 ## Commit Naming Allowed
 
 Allowed commit types:
@@ -35,10 +65,15 @@ Example:
 - Commit message lint runs on PRs.
 - Version bump and tag run on `main` merges.
 
-## Local git hook
+Endpoints:
 
-Install the commit message hook:
+- `POST /api/auth/register/`
+- `POST /api/auth/login/`
+- `POST /api/auth/refresh/`
+- `GET /api/auth/me/`
+
+Use token Bearer for protected routes:
 
 ```bash
-poetry run pre-commit install --hook-type commit-msg
+Authorization: Bearer <access_token>
 ```
