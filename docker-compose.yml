@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: glysto-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-glysto}
+      POSTGRES_USER: ${DB_USER:-glysto}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-glysto}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-glysto} -d ${DB_NAME:-glysto}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build: .
+    container_name: glysto-web
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DEBUG: ${DEBUG:-true}
+      SECRET_KEY: ${SECRET_KEY:-django-insecure-local-dev-key}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1,localhost}
+      DB_NAME: ${DB_NAME:-glysto}
+      DB_USER: ${DB_USER:-glysto}
+      DB_PASSWORD: ${DB_PASSWORD:-glysto}
+      DB_HOST: db
+      DB_PORT: ${DB_PORT:-5432}
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

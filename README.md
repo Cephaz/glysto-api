@@ -6,6 +6,20 @@
 poetry install
 ```
 
+## Environment files
+
+Use one `.env` for local and Docker:
+
+```bash
+cp .env.example .env
+```
+
+## Full Docker (Django + PostgreSQL):
+
+```bash
+docker compose up --build
+```
+
 ## Demarrage Django + users auth basique
 
 Commandes utiles:
