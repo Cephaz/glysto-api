@@ -1,4 +1,4 @@
-![Version 0.4.0](https://img.shields.io/badge/version-0.4.0-2ea44f)
+![Version 0.5.0](https://img.shields.io/badge/version-0.5.0-2ea44f)
 
 ## Installation
 
